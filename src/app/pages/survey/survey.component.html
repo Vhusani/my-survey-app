@@ -1,0 +1,60 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <img width="40" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="/>
+    <span>Survey Application</span>
+      <div class="spacer"></div>
+  </div> 
+  <div class="content" role="main">
+    <mat-card class="w-75 h-75">
+      <mat-tab-group mat-align-tabs="left">
+        <!--form-->
+        <mat-tab label="Name">
+          <form [formGroup]="formDetails"(ngSubmit)="onSubmit()">
+
+          <div class="p-3 pb-0">
+            <p class="mb-2">What is your name?</p>
+            <mat-form-field class="w-75" appearance="fill">
+              <mat-label>Enter your full name</mat-label>
+              <input matInput formControlName="name" placeholder="Enter your full name">
+            </mat-form-field>
+          </div>
+          <div class="p-3 pt-0">
+            <p class="mb-2">What is your favourite programming language?</p>
+            <mat-radio-group formControlName="radioValue"  aria-label="Select an option">
+              <mat-radio-button value="Php" class="w-100 mb-2">PHP</mat-radio-button>
+              <mat-radio-button value="Java" class="w-100 mb-2">JAVA</mat-radio-button>
+              <mat-radio-button value="c-sharp" class="w-100 mb-2">C#</mat-radio-button>
+              <mat-radio-button value="Python" class="w-100 mb-2">PYTHON</mat-radio-button>
+              <mat-radio-button value="other" class="w-100 mb-3">OTHER</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="w-75" appearance="fill" *ngIf="formDetails.controls['radioValue'].value === 'other'">
+              <mat-label>Enter your favourite programming language</mat-label>
+              <input matInput formControlName="programmingLanguage" placeholder="Programming language">
+            </mat-form-field> 
+            <div>
+              <button type="submit" [disabled]="formDetails.invalid" mat-raised-button>Submit</button>    
+            </div>
+          </div>
+        </form>
+        </mat-tab>
+      <!--form-->
+        <mat-tab label="Responses">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6" *ngFor="let user of userList">
+                <div class="card mt-3" >
+                  <div class="card-body p-0">
+                    <b>Name:</b> {{user.name}}<br>
+                    <b>Language:</b> {{user.radioValue}} <span style="font-style: italic;" *ngIf="user.programmingLanguage">=> {{user.programmingLanguage}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+  
+  
+  
